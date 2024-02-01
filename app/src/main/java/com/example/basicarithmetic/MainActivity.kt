@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize EditText and TextView
-        number1 = findViewById(R.id.number2)
-        number2 = findViewById(R.id.number1)
+        number1 = findViewById(R.id.number1)
+        number2 = findViewById(R.id.number2)
         resultTextView = findViewById(R.id.resultTextView)
 
         // Initialize RadioGroup for operations
