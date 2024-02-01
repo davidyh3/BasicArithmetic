@@ -15,7 +15,6 @@ package com.example.basicarithmetic
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize EditText and TextView
-        number1 = findViewById(R.id.number1)
-        number2 = findViewById(R.id.number2)
+        number1 = findViewById(R.id.number2)
+        number2 = findViewById(R.id.number1)
         resultTextView = findViewById(R.id.resultTextView)
 
         // Initialize RadioGroup for operations
