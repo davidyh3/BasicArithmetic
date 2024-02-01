@@ -1,81 +1,80 @@
+/*
+ * AI USE ACKNOWLEDGEMENT
+ *
+ * For this assignment, I wrote most of my code, including the activity_main.xml.
+ * However, since I changed my code from CheckBoxes to RadioGroups (I did not use
+ * RadioGroup but only RadioButtons in my first try so I though it is not useful
+ * for this assignment until I am packing everything up in the last minute), I
+ * have to rewrite everything. To have a quicker debugging, I asked ChatGPT for
+ * the way to change from CheckBox to RadioGroup.
+ */
+
+
 package com.example.basicarithmetic
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    // These are for the FIRST and SECOND number input
-    lateinit var number1 : EditText
-    lateinit var number2 : EditText
+    private lateinit var number1: EditText
+    private lateinit var number2: EditText
+    private lateinit var resultTextView: TextView
+    private lateinit var operationGroup: RadioGroup
 
-    // This is for the RESULT textview
-    lateinit var resultTextView : TextView
-
-    // We need to create 2 doubles for inputs and 1 double for output.
-    val a = number1.text.toString().toDouble()
-    val b = number2.text.toString().toDouble()
-    var output = 0.0
-
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // These are for the FIRST and SECOND number input
+        // Initialize EditText and TextView
         number1 = findViewById(R.id.number1)
         number2 = findViewById(R.id.number2)
-
-        // This is for the RESULT textview
         resultTextView = findViewById(R.id.resultTextView)
 
-        val add = findViewById<CheckBox>(R.id.btn_addition) as CheckBox
-        val sub = findViewById<CheckBox>(R.id.btn_subtraction) as CheckBox
-        val mul = findViewById<CheckBox>(R.id.btn_multiplication) as CheckBox
-        val div = findViewById<CheckBox>(R.id.btn_division) as CheckBox
-        val mod = findViewById<CheckBox>(R.id.btn_modulus) as CheckBox
-        val btnCalculate = findViewById<Button>(R.id.calculateButton) as Button
+        // Initialize RadioGroup for operations
+        operationGroup = findViewById(R.id.operationGroup)
 
-        // If we click the bottom
+        // Initialize and set up the calculate button
+        val btnCalculate = findViewById<Button>(R.id.calculateButton)
         btnCalculate.setOnClickListener {
-            if (add.isChecked && !sub.isChecked && !mul.isChecked &&
-                !div.isChecked && !mod.isChecked) {
-                output = a + b
+            calculateResult()
+        }
+    }
 
-                // We send the result to the resultTextView
-                resultTextView.text = "Result is $output"
-            } else if (!add.isChecked && sub.isChecked && !mul.isChecked &&
-                !div.isChecked && !mod.isChecked) {
-                output = a - b
+    private fun calculateResult() {
+        if (number1.text.isEmpty() || number2.text.isEmpty()) {
+            resultTextView.text = "Please enter both numbers"
+            return
+        }
 
-                // We send the result to the result textview
-                resultTextView.text = "Result is $output"
-            } else if (!add.isChecked && !sub.isChecked && mul.isChecked &&
-                !div.isChecked && !mod.isChecked) {
-                output = a * b
+        val a = number1.text.toString().toDouble()
+        val b = number2.text.toString().toDouble()
+        var output: Double? = null
 
-                // We send the result to the result textview
-                resultTextView.text = "Result is $output"
-            } else if (!add.isChecked && !sub.isChecked && !mul.isChecked &&
-                div.isChecked && !mod.isChecked) {
-                output = a / b
-
-                // We send the result to the result textview
-                resultTextView.text = "Result is $output"
-            } else if (!add.isChecked && !sub.isChecked && !mul.isChecked &&
-                !div.isChecked && mod.isChecked) {
-                output = a % b
-
-                // We send the result to the result textview
-                resultTextView.text = "Result is $output"
-            } else {
-                resultTextView.text = "Error"
+        when (operationGroup.checkedRadioButtonId) {
+            R.id.btn_addition -> output = a + b
+            R.id.btn_subtraction -> output = a - b
+            R.id.btn_multiplication -> output = a * b
+            R.id.btn_division -> {
+                if (b != 0.0) {
+                    output = a / b
+                } else {
+                    resultTextView.text = "Cannot divide by zero"
+                    return
+                }
             }
+            R.id.btn_modulus -> output = a % b
+        }
+
+        output?.let {
+            resultTextView.text = "Result: $it"
+        } ?: run {
+            resultTextView.text = "Please select an operation"
         }
     }
 }

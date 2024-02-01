@@ -34,82 +34,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/btn_modulus"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/operationGroup">
 
         <Button
             android:id="@+id/calculateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_gravity="center"
+            android:layout_marginStart="20dp"
             android:text="CALCULATE" />
 
         <TextView
             android:id="@+id/resultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_gravity="center"
+            android:layout_margin="20dp"
             android:gravity="center"
             android:text="Result"
             android:textSize="30sp" />
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/btn_addition"
-        android:layout_width="150dp"
+    <RadioGroup
+        android:id="@+id/operationGroup"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="10dp"
-        android:text="Addition"
-        app:layout_constraintEnd_toStartOf="@+id/btn_subtraction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number1" />
-
-    <CheckBox
-        android:id="@+id/btn_subtraction"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
-        android:text="Subtraction"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_addition"
-        app:layout_constraintTop_toBottomOf="@+id/number1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number1">
 
-    <CheckBox
-        android:id="@+id/btn_division"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Division"
-        app:layout_constraintEnd_toEndOf="@+id/btn_subtraction"
-        app:layout_constraintStart_toStartOf="@+id/btn_subtraction"
-        app:layout_constraintTop_toBottomOf="@+id/btn_subtraction" />
+        <RadioButton
+            android:id="@+id/btn_addition"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="+" />
 
-    <CheckBox
-        android:id="@+id/btn_multiplication"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Multiplication"
-        app:layout_constraintEnd_toEndOf="@+id/btn_addition"
-        app:layout_constraintStart_toStartOf="@+id/btn_addition"
-        app:layout_constraintTop_toBottomOf="@+id/btn_addition" />
+        <RadioButton
+            android:id="@+id/btn_subtraction"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="-" />
 
-    <CheckBox
-        android:id="@+id/btn_modulus"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Modulus"
-        app:layout_constraintEnd_toEndOf="@+id/btn_multiplication"
-        app:layout_constraintStart_toStartOf="@+id/btn_multiplication"
-        app:layout_constraintTop_toBottomOf="@+id/btn_multiplication" />
+        <RadioButton
+            android:id="@+id/btn_multiplication"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="*" />
+
+        <RadioButton
+            android:id="@+id/btn_division"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="/" />
+
+        <RadioButton
+            android:id="@+id/btn_modulus"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="%" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
